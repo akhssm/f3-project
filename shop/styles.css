@@ -143,21 +143,26 @@ main-content section title {
 }
 
 main-content .items {
-  display: flex;
-  width: auto;
-  overflow-x: scroll;
-  padding: 1rem 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
   gap: 1rem;
+  padding: 1rem 0;
 }
 
 main-content .items .item {
   border: 1px solid black;
-  width: 30%;
+  padding-bottom: 1rem;
 }
 
+
 main-content .items .item img {
-  max-width: 100%;
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  margin: 0 auto;
+  display: block;
 }
+
 
 main-content .items .item .row {
   display: flex;

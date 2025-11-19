@@ -1,41 +1,57 @@
-// Load cart from localStorage
+const cartContainer = document.getElementById("cart-container");
+const checkoutList = document.getElementById("checkout-list");
+const totalBox = document.getElementById("total");
+const checkoutBtn = document.getElementById("checkoutBtn");
+
+/* ============================
+   LOAD CART ITEMS
+============================ */
+
 function loadCart() {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
-    let container = document.getElementById("cart-container");
+
+    cartContainer.innerHTML = "";
+    checkoutList.innerHTML = "";
     let total = 0;
 
     if (cart.length === 0) {
-        container.innerHTML = "<h2>Your cart is empty</h2>";
-        document.getElementById("total-price").innerText = 0;
+        cartContainer.innerHTML = "<h2>Your cart is empty.</h2>";
+        totalBox.innerText = "₹0";
         return;
     }
 
-    container.innerHTML = "";
-
     cart.forEach((item, index) => {
-        total += item.price * item.qty;
+        total += Number(item.price);
 
-        container.innerHTML += `
-            <div class="cart-item">
-                <img src="${item.image}" />
+        let div = document.createElement("div");
+        div.classList.add("cart-item");
 
-                <div class="cart-details">
-                    <div class="cart-title">${item.title}</div>
-                    <div class="cart-price">₹ ${item.price}</div>
-                </div>
-
-                <button class="remove-btn" onclick="removeItem(${index})">
-                    Remove
-                </button>
+        div.innerHTML = `
+            <img src="${item.image}" />
+            <div class="cart-details">
+                <h3 class="cart-title">${item.title}</h3>
+                <p class="cart-price">₹${item.price}</p>
             </div>
+            <button class="remove-btn" data-index="${index}">Remove</button>
         `;
+
+        cartContainer.appendChild(div);
+
+        let li = document.createElement("li");
+        li.innerHTML = `<span>${index + 1}. ${item.title}</span> <span>₹${item.price}</span>`;
+        checkoutList.appendChild(li);
     });
 
-    document.getElementById("total-price").innerText = total;
+    totalBox.innerText = "₹" + total;
+
+    document.querySelectorAll(".remove-btn").forEach(btn => {
+        btn.addEventListener("click", removeItem);
+    });
 }
 
-// Remove item from cart
-function removeItem(index) {
+function removeItem(e) {
+    let index = e.target.dataset.index;
+
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
     cart.splice(index, 1);
 
@@ -43,24 +59,38 @@ function removeItem(index) {
     loadCart();
 }
 
-// Start Razorpay payment
-function payNow() {
-    let total = Number(document.getElementById("total-price").innerText);
+loadCart();
 
-    var options = {
-        key: "rzp_test_123456789",  // Replace with your Razorpay test key
+/* ============================
+   PAYMENT BUTTON (Razorpay)
+============================ */
+
+checkoutBtn.addEventListener("click", function (e) {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    if (cart.length === 0) {
+        alert("Your cart is empty!");
+        return;
+    }
+
+    let total = cart.reduce((sum, item) => sum + Number(item.price), 0);
+
+    let options = {
+        key: "<API_KEY>", 
         amount: total * 100,
         currency: "INR",
-        name: "MeShop Payment",
-        description: "Order Checkout",
+        name: "MeShop Checkout",
+        description: "Payment for your cart items",
+        theme: { color: "#000" },
 
-        handler: function (response) {
+        handler: function () {
             alert("Payment Successful!");
             localStorage.removeItem("cart");
-            window.location.href = "../razorpay/success.html";
+            loadCart();
         }
     };
 
-    let rzp = new Razorpay(options);
-    rzp.open();
-}
+    let payment = new Razorpay(options);
+    payment.open();
+
+    e.preventDefault();
+});
