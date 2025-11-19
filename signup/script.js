@@ -1,27 +1,34 @@
-document.getElementById("signupForm").addEventListener("submit", function (e) {
+const signupForm = document.getElementById("signupForm");
+
+signupForm.addEventListener("submit", function (e) {
   e.preventDefault();
 
-  let fname = document.getElementById("fname").value;
-  let lname = document.getElementById("lname").value;
-  let email = document.getElementById("email").value;
-  let password = document.getElementById("password").value;
-  let cpassword = document.getElementById("cpassword").value;
+  let fname = document.getElementById("fname").value.trim();
+  let lname = document.getElementById("lname").value.trim();
+  let email = document.getElementById("email").value.trim();
+  let password = document.getElementById("password").value.trim();
+  let cpassword = document.getElementById("cpassword").value.trim();
 
+  // Check password match
   if (password !== cpassword) {
     alert("Passwords do not match!");
     return;
   }
 
+  // Load existing users
   let users = JSON.parse(localStorage.getItem("users")) || [];
 
   // Check if user already exists
-  if (users.some(u => u.email === email)) {
-    alert("User already exists!");
+  let exists = users.some(user => user.email === email);
+  if (exists) {
+    alert("User already exists! Please login.");
     return;
   }
 
+  // Create user
   let newUser = {
-    name: fname + " " + lname,
+    fname,
+    lname,
     email,
     password
   };
@@ -29,6 +36,6 @@ document.getElementById("signupForm").addEventListener("submit", function (e) {
   users.push(newUser);
   localStorage.setItem("users", JSON.stringify(users));
 
-  alert("Signup Successful!");
+  alert("Signup successful! Please login.");
   window.location.href = "../login/index.html";
 });

@@ -1,68 +1,73 @@
-/* Write your styles here */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap");
 
-body {
-    margin: 0;
-    background: #f5f5f5;
-    font-family: 'Inter', sans-serif;
+*{box-sizing:border-box;margin:0;padding:0;font-family:'Inter',sans-serif;}
+
+body{background:#fff;color:#111;}
+
+/* top nav */
+nav{
+  background:#000;color:#fff;padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center;
+}
+nav a{color:#fff;margin-left:1.25rem;text-decoration:none;font-size:14px}
+
+/* center the page content column */
+.wrapper{
+  width:95%;
+  max-width:1100px;   /* big page width to match screenshot */
+  margin:1.5rem auto;
 }
 
-.title {
-    text-align: center;
-    margin: 30px 0;
-    font-size: 30px;
-    font-weight: 700;
+/* headings */
+h2{
+  text-align:center;
+  margin:2rem 0 1.5rem;
+  font-size:28px;
+  font-weight:700;
 }
 
-.profile-box {
-    width: 90%;
-    max-width: 450px;
-    background: white;
-    padding: 25px;
-    margin: 20px auto;
-    border-radius: 10px;
-    box-shadow: 0px 2px 8px rgba(0,0,0,0.1);
-    display: flex;
-    flex-direction: column;
+/* keep forms in a centered column that defines input/button alignment */
+.form-block{
+  width:100%;
+  max-width:800px;   /* the column width for inputs & buttons */
+  margin:0 auto 2rem; /* centers the form-block horizontally */
 }
 
-.profile-box label {
-    margin-top: 15px;
-    font-size: 15px;
-    font-weight: 600;
+/* inputs span full width of .form-block */
+.form-block input{
+  width:100%;
+  padding:14px;
+  border:1px solid #000;
+  margin-bottom:14px;
+  font-size:15px;
+  background:transparent;
+  outline:none;
 }
 
-.profile-box input {
-    margin-top: 6px;
-    padding: 12px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    font-size: 15px;
+/* buttons are inline-block — left edge aligns with form-block left edge */
+.btn{
+  display:inline-block;
+  padding:10px 20px;
+  background:#000;
+  color:#fff;
+  border:none;
+  cursor:pointer;
+  font-size:14px;
+  text-align:center;
 }
 
-.save-btn {
-    margin-top: 25px;
-    padding: 12px;
-    background: black;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
+/* small gap under buttons */
+.btn + .btn{margin-left:8px}
+
+/* actions container uses same width and centering as form-block,
+   so the Logout button sits exactly under the Change Password button */
+.actions{
+  width:100%;
+  max-width:800px;   /* same as .form-block */
+  margin:0 auto 3rem; /* centers it and places vertical gap */
 }
 
-.save-btn:hover {
-    background: #222;
-}
+/* subtle top spacing for logout (optional) */
+.logout{ margin-top:6px; }
 
-.logout-btn {
-    margin-top: 15px;
-    padding: 12px;
-    background: #e74c3c;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-}
-
-.logout-btn:hover {
-    background: #c0392b;
-}
+/* hover */
+.btn:hover{background:#333;}
