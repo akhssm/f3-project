@@ -9,23 +9,19 @@ signupForm.addEventListener("submit", function (e) {
   let password = document.getElementById("password").value.trim();
   let cpassword = document.getElementById("cpassword").value.trim();
 
-  // Check password match
   if (password !== cpassword) {
     alert("Passwords do not match!");
     return;
   }
 
-  // Load existing users
   let users = JSON.parse(localStorage.getItem("users")) || [];
 
-  // Check if user already exists
   let exists = users.some(user => user.email === email);
   if (exists) {
     alert("User already exists! Please login.");
     return;
   }
 
-  // Create user
   let newUser = {
     fname,
     lname,

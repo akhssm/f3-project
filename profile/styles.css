@@ -4,20 +4,17 @@
 
 body{background:#fff;color:#111;}
 
-/* top nav */
 nav{
   background:#000;color:#fff;padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center;
 }
 nav a{color:#fff;margin-left:1.25rem;text-decoration:none;font-size:14px}
 
-/* center the page content column */
 .wrapper{
   width:95%;
-  max-width:1100px;   /* big page width to match screenshot */
+  max-width:1100px;  
   margin:1.5rem auto;
 }
 
-/* headings */
 h2{
   text-align:center;
   margin:2rem 0 1.5rem;
@@ -25,14 +22,12 @@ h2{
   font-weight:700;
 }
 
-/* keep forms in a centered column that defines input/button alignment */
 .form-block{
   width:100%;
-  max-width:800px;   /* the column width for inputs & buttons */
-  margin:0 auto 2rem; /* centers the form-block horizontally */
+  max-width:800px;   
+  margin:0 auto 2rem; 
 }
 
-/* inputs span full width of .form-block */
 .form-block input{
   width:100%;
   padding:14px;
@@ -43,7 +38,6 @@ h2{
   outline:none;
 }
 
-/* buttons are inline-block — left edge aligns with form-block left edge */
 .btn{
   display:inline-block;
   padding:10px 20px;
@@ -55,19 +49,14 @@ h2{
   text-align:center;
 }
 
-/* small gap under buttons */
 .btn + .btn{margin-left:8px}
 
-/* actions container uses same width and centering as form-block,
-   so the Logout button sits exactly under the Change Password button */
 .actions{
   width:100%;
-  max-width:800px;   /* same as .form-block */
-  margin:0 auto 3rem; /* centers it and places vertical gap */
+  max-width:800px;  
+  margin:0 auto 3rem; 
 }
 
-/* subtle top spacing for logout (optional) */
 .logout{ margin-top:6px; }
 
-/* hover */
 .btn:hover{background:#333;}

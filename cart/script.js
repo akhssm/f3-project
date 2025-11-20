@@ -3,10 +3,6 @@ const checkoutList = document.getElementById("checkout-list");
 const totalBox = document.getElementById("total");
 const checkoutBtn = document.getElementById("checkoutBtn");
 
-/* ============================
-   LOAD CART ITEMS
-============================ */
-
 function loadCart() {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
@@ -60,10 +56,6 @@ function removeItem(e) {
 }
 
 loadCart();
-
-/* ============================
-   PAYMENT BUTTON (Razorpay)
-============================ */
 
 checkoutBtn.addEventListener("click", function (e) {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];

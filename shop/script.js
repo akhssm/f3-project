@@ -1,16 +1,8 @@
-/* ============================
-   GLOBAL VARIABLES
-============================ */
-
 const productContainer = document.getElementById("products");
 const searchInput = document.getElementById("search");
 const categoryFilters = document.querySelectorAll(".filter-category");
 
 let productList = [];
-
-/* ============================
-   FETCH PRODUCTS
-============================ */
 
 async function loadProducts() {
   try {
@@ -22,10 +14,6 @@ async function loadProducts() {
   }
 }
 loadProducts();
-
-/* ============================
-   DISPLAY PRODUCTS (FIXED)
-============================ */
 
 function displayProducts(products) {
   productContainer.innerHTML = "";
@@ -66,10 +54,6 @@ function displayProducts(products) {
   });
 }
 
-/* ============================
-   ADD TO CART
-============================ */
-
 function addToCart(product) {
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
@@ -85,10 +69,6 @@ function addToCart(product) {
   alert("Item added to cart!");
 }
 
-/* ============================
-   SEARCH FILTER
-============================ */
-
 searchInput.addEventListener("input", () => {
   let value = searchInput.value.toLowerCase();
   let filtered = productList.filter(p =>
@@ -96,10 +76,6 @@ searchInput.addEventListener("input", () => {
   );
   displayProducts(filtered);
 });
-
-/* ============================
-   CATEGORY FILTER
-============================ */
 
 categoryFilters.forEach(filter => {
   filter.addEventListener("click", () => {

@@ -1,9 +1,7 @@
-// Load user profile on page load
 window.onload = function () {
   loadProfile();
 };
 
-// Load profile details
 function loadProfile() {
   let currentUser = JSON.parse(localStorage.getItem("currentUser"));
   let users = JSON.parse(localStorage.getItem("users")) || [];
@@ -14,7 +12,6 @@ function loadProfile() {
     return;
   }
 
-  // Find logged-in user data
   let user = users.find(u => u.email === currentUser.email);
 
   if (!user) {
@@ -22,14 +19,10 @@ function loadProfile() {
     return;
   }
 
-  // Fill profile inputs
   document.getElementById("fname").value = user.fname;
   document.getElementById("lname").value = user.lname;
 }
 
-
-
-// Save updated name information
 document.getElementById("profileForm").addEventListener("submit", function (e) {
   e.preventDefault();
 
@@ -44,7 +37,6 @@ document.getElementById("profileForm").addEventListener("submit", function (e) {
     return;
   }
 
-  // Update the user inside users array
   users = users.map(u => {
     if (u.email === currentUser.email) {
       return {
@@ -56,16 +48,11 @@ document.getElementById("profileForm").addEventListener("submit", function (e) {
     return u;
   });
 
-  // Save back to localStorage
   localStorage.setItem("users", JSON.stringify(users));
 
   alert("Profile updated successfully!");
 });
 
-
-
-
-// Handle password change
 document.getElementById("passwordForm").addEventListener("submit", function (e) {
   e.preventDefault();
 
@@ -83,7 +70,6 @@ document.getElementById("passwordForm").addEventListener("submit", function (e) 
     return;
   }
 
-  // Old password check
   if (oldPass !== user.password) {
     alert("Old password is incorrect!");
     return;
@@ -99,7 +85,6 @@ document.getElementById("passwordForm").addEventListener("submit", function (e) 
     return;
   }
 
-  // Update password
   users = users.map(u => {
     if (u.email === currentUser.email) {
       return {
@@ -115,10 +100,6 @@ document.getElementById("passwordForm").addEventListener("submit", function (e) 
   alert("Password changed successfully!");
 });
 
-
-
-
-// Logout
 document.querySelector(".logout").addEventListener("click", function () {
   localStorage.removeItem("currentUser");
   alert("Logged out!");

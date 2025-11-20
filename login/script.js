@@ -17,7 +17,6 @@ loginForm.addEventListener("submit", function (e) {
     return;
   }
 
-  // Create user session
   let token = Math.random().toString(36).substring(2);
 
   localStorage.setItem(
@@ -30,6 +29,5 @@ loginForm.addEventListener("submit", function (e) {
 
   alert("Login successful!");
 
-  // ✅ Correct redirect (to shop page)
   window.location.href = "../shop/index.html";
 });
